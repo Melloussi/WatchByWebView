@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_container"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/circule_corner_with_black_border"
+    style="@style/darkTheme">
+
+    <TextView
+        android:id="@+id/websiteNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        style="@style/darkTheme"/>
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="68dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="6dp">
+
+        <ImageView
+            android:id="@+id/websiteIconImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_test"
+            android:visibility="visible" />
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

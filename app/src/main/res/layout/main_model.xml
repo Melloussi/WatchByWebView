@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/resourceContainer"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:layout_margin="8dp"
+    android:background="@drawable/circule_corner_with_black_border"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/websiteNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textSize="10pt"
+        android:textStyle="bold"
+        style="@style/darkTheme"/>
+    <androidx.cardview.widget.CardView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="6dp"
+        app:cardCornerRadius="68dp">
+        <ImageView
+            android:visibility="visible"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/websiteIconImageView"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_test" />
+    </androidx.cardview.widget.CardView>
+
+    <ImageView
+        android:id="@+id/heartIcon"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/favorite_black_icon"
+        style="@style/darkTheme"/>
+
+</RelativeLayout>

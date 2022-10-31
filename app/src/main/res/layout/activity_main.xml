@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/drawerLayout"
+    android:layoutDirection="rtl"
+    tools:openDrawer="start"
+    android:fitsSystemWindows="true"
+    style="@style/darkTheme"
+    tools:context=".UI.Activities.MainActivity">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:id="@+id/toolBarContainer"
+            android:layout_toLeftOf="@id/redLine"
+            android:outlineSpotShadowColor="@color/transparent"
+            android:background="@color/transparent"
+            tools:ignore="UnusedAttribute">
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:titleTextColor="@color/white"
+                android:minHeight="?attr/actionBarSize">
+                <SearchView
+                    android:id="@+id/searchView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/circle_shape"
+                    android:queryHint="@string/search_for_resource"
+                    android:searchIcon="@drawable/search_white_icon"
+                    android:iconifiedByDefault="false"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:theme="@style/AppSearchView"
+                    tools:ignore="RtlSymmetry" />
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <FrameLayout
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/toolBarContainer"
+            android:layout_toLeftOf="@id/redLine"
+            android:layoutDirection="ltr" />
+        <FrameLayout
+            android:visibility="gone"
+            android:id="@+id/searchResultContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:layout_below="@id/toolBarContainer"
+            android:layout_toLeftOf="@id/redLine"
+            android:layoutDirection="ltr"/>
+        <View
+            android:id="@+id/redLine"
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/red" />
+    </RelativeLayout>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/navigationView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        style="@style/darkTheme"
+        app:headerLayout="@layout/my_header"
+
+
+        app:itemIconTint="@color/red"
+
+        app:menu="@menu/my_menu"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"/>
+
+</androidx.drawerlayout.widget.DrawerLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <group
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/home_red_icon"
+            android:title="@string/home" />
+
+        <item
+            android:id="@+id/fav"
+            android:icon="@drawable/fav_red_icon"
+            android:title="@string/favorite" />
+
+    </group>
+
+
+    <item
+        android:id="@+id/shareApp"
+        android:icon="@drawable/share_red_icon"
+        android:title="@string/shareTheApp" />
+
+    <item
+        android:id="@+id/otherApps"
+        android:icon="@drawable/apps_red_icon"
+        android:title="@string/otherApps" />
+
+    <item
+        android:id="@+id/contactUs"
+        android:icon="@drawable/contact_red_icon"
+        android:title="@string/contactUs" />
+
+    <item
+        android:id="@+id/switchMode"
+        android:icon="@drawable/bghit_red_icon"
+        android:checkable="true"
+        android:title="@string/darkMode"
+        android:actionLayout="@layout/switch_layout"/>
+
+</menu>
