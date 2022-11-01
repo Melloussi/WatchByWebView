@@ -15,6 +15,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +51,8 @@ class MainActivity : AppCompatActivity() {
     private val WEBVIEW_FRAGMENT = 2
     private val NIGHTE_MODE = true
     private val DAY_MODE = false
+    private val TWO_MILLI_SECONDS = 2000
+    private var CURRENT_TIME_MILLI_SECONDS:Long = 0
 
     //lateinit var mainAdapter: MainAdapter
     private val mainResourceList = ArrayList<WDSource>()
@@ -63,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         //supportActionBar?.hide()
         //setTheme(android.R.style.ThemeOverlay_Material_Dark)
         installSplashScreen()
-        println("--------- Value: ${getModeValue()}")
         themeChanger(getModeValue())
 
         super.onCreate(savedInstanceState)
@@ -105,15 +107,31 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.fav -> fragmentSwitcher(FavoriteFragment(), FAVORITE_FRAGMENT)
-                R.id.home -> fragmentSwitcher(MainFragment(), MAIN_FRAGMENT)
-                R.id.shareApp -> share()
-                R.id.otherApps -> otherApps()
-                R.id.contactUs -> contactUs()
+                R.id.fav -> {
+                    fragmentSwitcher(FavoriteFragment(), FAVORITE_FRAGMENT)
+                    drawerLayout.closeDrawer(navigationView)
+                }
+                R.id.home -> {
+                    fragmentSwitcher(MainFragment(), MAIN_FRAGMENT)
+                    drawerLayout.closeDrawer(navigationView)
+                }
+                R.id.shareApp -> {
+                    share()
+                    drawerLayout.closeDrawer(navigationView)
+                }
+                R.id.otherApps -> {
+                    otherApps()
+                    drawerLayout.closeDrawer(navigationView)
+                }
+                R.id.contactUs -> {
+                    contactUs()
+                    drawerLayout.closeDrawer(navigationView)
+                }
             }
             true
         }
         switchModeListener(navigationView.menu)
+
 
 
 
@@ -201,7 +219,6 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-//            setTheme(AppCompatDelegate.MODE_NIGHT_NO)
 
         }
 
@@ -254,5 +271,16 @@ class MainActivity : AppCompatActivity() {
         return sharedPref.getBoolean(getString(R.string.modeValue), false)
     }
 
-
+    override fun onBackPressed() {
+        if(CURRENT_FRAGMENT != MAIN_FRAGMENT){
+            fragmentSwitcher(MainFragment(), MAIN_FRAGMENT)
+        }else if(
+            CURRENT_TIME_MILLI_SECONDS + TWO_MILLI_SECONDS > System.currentTimeMillis()
+        ){
+            super.onBackPressed()
+        }else{
+            Toast.makeText(this,R.string.pressTwiceToExit,Toast.LENGTH_SHORT).show()
+            CURRENT_TIME_MILLI_SECONDS = System.currentTimeMillis()
+        }
+    }
 }

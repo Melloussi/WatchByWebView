@@ -53,7 +53,8 @@
             android:layout_height="match_parent"
             android:layout_below="@id/toolBarContainer"
             android:layout_toLeftOf="@id/redLine"
-            android:layoutDirection="ltr" />
+            android:layoutDirection="ltr"
+            style="@style/darkTheme"/>
         <FrameLayout
             android:visibility="gone"
             android:id="@+id/searchResultContainer"

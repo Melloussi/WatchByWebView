@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="splash" parent="Theme.SplashScreen">
+    <style name="splash" parent="darkTheme">
 
-        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/red</item>
-        <item name="backgroundColor">@color/red</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_icon_4k</item>
-        <item name="postSplashScreenTheme">@style/Theme.WatchByWebView</item>
+        <item name="postSplashScreenTheme">@style/darkTheme</item>
 
     </style>
 </resources>

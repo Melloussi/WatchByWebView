@@ -19,4 +19,5 @@
     <string name="controlButtons">ازرار التحكم</string>
     <string name="SearchResult">نتائج البحث</string>
     <string name="modeValue">MODE_VALUE</string>
+    <string name="pressTwiceToExit">اضغط مرتين للخروج من التطبيق</string>
 </resources>
