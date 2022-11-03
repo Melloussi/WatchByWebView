@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.network.watchbywebview.R
 import com.network.watchbywebview.UI.Activities.MainActivity
 import com.network.watchbywebview.UI.Adapters.SearchResultAdapter
+import com.network.watchbywebview.UI.communication.Communicat
 import com.network.watchbywebview.ViewModel.SearchResultVM
 import com.network.watchbywebview.ViewModel.WebViewViewModel
 
@@ -27,6 +28,8 @@ class DisplaySearchResultFragment : Fragment() {
         val searchResultVM : SearchResultVM by activityViewModels()
         val webViewVM : WebViewViewModel by activityViewModels()
         val isDarkTheme = (activity as MainActivity).getModeValue()
+        val WEBVIEW_FRAGMENT = 2
+        val fragmentCallback = activity as Communicat
 
         val context = requireContext()
         val recyclerView = view.findViewById<RecyclerView>(R.id.mainRecyclerView)
@@ -36,7 +39,8 @@ class DisplaySearchResultFragment : Fragment() {
                 val adapter = SearchResultAdapter(context, list, isDarkTheme){
                         position ->
                     webViewVM.setUrlSource(list[position].sourceUrl)
-                    (activity as MainActivity?)?.fragmentSwitcher(DisplayWebView(), 0)
+//                    (activity as MainActivity?)?.fragmentSwitcher(DisplayWebView(), WEBVIEW_FRAGMENT)
+                    fragmentCallback.openWebView(list[position].sourceUrl)
                 }
                 recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
                 recyclerView.adapter = adapter

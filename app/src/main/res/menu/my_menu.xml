@@ -34,11 +34,11 @@
         android:icon="@drawable/contact_red_icon"
         android:title="@string/contactUs" />
 
-    <item
-        android:id="@+id/switchMode"
-        android:icon="@drawable/bghit_red_icon"
-        android:checkable="true"
-        android:title="@string/darkMode"
-        android:actionLayout="@layout/switch_layout"/>
+<!--    <item-->
+<!--        android:id="@+id/switchMode"-->
+<!--        android:icon="@drawable/bghit_red_icon"-->
+<!--        android:checkable="true"-->
+<!--        android:title="@string/darkMode"-->
+<!--        android:actionLayout="@layout/switch_layout"/>-->
 
 </menu>

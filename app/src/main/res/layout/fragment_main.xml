@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="0dp"
-    style="@style/darkTheme"
+    android:background="@color/white"
     tools:context=".UI.Fragments.MainFragment">
 
     <androidx.core.widget.NestedScrollView
@@ -29,8 +29,8 @@
                     android:layout_margin="2dp"
                     android:gravity="center"
                     android:text="@string/favorite_resource"
-                    android:textSize="9pt"
-                    style="@style/darkTheme"/>
+                    android:textColor="@color/black"
+                    android:textSize="9pt" />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -38,7 +38,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="4dp"
                     android:src="@drawable/favorite_black_icon"
-                    style="@style/darkTheme"/>
+                    app:tint="@color/black" />
 
             </LinearLayout>
 
@@ -71,8 +71,9 @@
                     android:layout_margin="2dp"
                     android:gravity="center"
                     android:text="@string/latest_resource"
+                    android:textColor="@color/black"
                     android:textSize="9pt"
-                    style="@style/darkTheme"/>
+                    />
 
                 <ImageView
                     android:layout_width="30dp"
@@ -80,7 +81,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="4dp"
                     android:src="@drawable/leatest_icon_black"
-                    style="@style/darkTheme"/>
+                    app:tint="@color/black" />
 
             </LinearLayout>
 

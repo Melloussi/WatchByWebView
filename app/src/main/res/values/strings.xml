@@ -20,4 +20,7 @@
     <string name="SearchResult">نتائج البحث</string>
     <string name="modeValue">MODE_VALUE</string>
     <string name="pressTwiceToExit">اضغط مرتين للخروج من التطبيق</string>
+    <string name="checkInternetConnection">المرجو تفقد اتصالك بالانترنت</string>
+    <string name="reConnection">اعادة الاتصال</string>
+    <string name="pleaseReCheck"> المرجو اعادة المحاولة، اتصال الانترنت غير موجود</string>
 </resources>

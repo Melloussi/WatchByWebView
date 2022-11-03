@@ -10,15 +10,11 @@
         <item name="colorSecondaryVariant">@color/red</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+<!--        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>-->
         <!-- Customize your theme here. -->
-        <item name="android:windowBackground">@color/white</item>
-        <item name="android:textColor">@color/black</item>
+<!--        <item name="android:windowBackground">@color/white</item>-->
+<!--        <item name="android:textColor">@color/black</item>-->
+<!--        <item name="android:textAppearance">@color/black</item>-->
+    </style>
 
-    </style>
-    <style name="darkTheme">
-        <item name="android:tint">@color/black</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:background">@color/white</item>
-    </style>
 </resources>

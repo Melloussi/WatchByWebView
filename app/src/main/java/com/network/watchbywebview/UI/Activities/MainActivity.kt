@@ -7,9 +7,9 @@ import android.annotation.SuppressLint
 import android.app.TaskStackBuilder
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -22,25 +22,27 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.appcompat.widget.Toolbar
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.content.ContextCompat
+
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.google.android.material.navigation.NavigationView
+import com.network.watchbywebview.Config.Config
 import com.network.watchbywebview.DATA.DataClasses.WDSource
 import com.network.watchbywebview.R
 import com.network.watchbywebview.UI.Adapters.FavoriteAdapter
 import com.network.watchbywebview.UI.Fragments.DisplaySearchResultFragment
 import com.network.watchbywebview.UI.Fragments.FavoriteFragment
 import com.network.watchbywebview.UI.Fragments.MainFragment
+import com.network.watchbywebview.UI.communication.Communicat
 import com.network.watchbywebview.ViewModel.FavoriteViewModel
 import com.network.watchbywebview.ViewModel.SearchResultVM
 import com.network.watchbywebview.ViewModel.WDSourceVM
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Communicat {
 
-    private lateinit var adservers: StringBuilder
     lateinit var toggle: ActionBarDrawerToggle
     lateinit var favoriteAdapter: FavoriteAdapter
     lateinit var searchResultContainer: FrameLayout
@@ -49,10 +51,9 @@ class MainActivity : AppCompatActivity() {
     private val MAIN_FRAGMENT = 0
     private val FAVORITE_FRAGMENT = 1
     private val WEBVIEW_FRAGMENT = 2
-    private val NIGHTE_MODE = true
-    private val DAY_MODE = false
     private val TWO_MILLI_SECONDS = 2000
     private var CURRENT_TIME_MILLI_SECONDS:Long = 0
+
 
     //lateinit var mainAdapter: MainAdapter
     private val mainResourceList = ArrayList<WDSource>()
@@ -65,8 +66,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         //supportActionBar?.hide()
         //setTheme(android.R.style.ThemeOverlay_Material_Dark)
-        installSplashScreen()
-        themeChanger(getModeValue())
+
+//        installSplashScreen()
+        //themeChanger(getModeValue())
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -81,8 +83,11 @@ class MainActivity : AppCompatActivity() {
 
         val drawerLayout = findViewById<DrawerLayout>(R.id.drawerLayout)
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
+        val color = ContextCompat.getColor(this, R.color.black)
+
 
         toggle = ActionBarDrawerToggle(this, drawerLayout, R.string.open, R.string.close)
+        toggle.drawerArrowDrawable.color = color
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
 
@@ -130,13 +135,12 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        switchModeListener(navigationView.menu)
+//        switchModeListener(navigationView.menu)
 
 
 
 
         fragmentSwitcher(MainFragment(), MAIN_FRAGMENT)
-
         displaySearchResultFragment(DisplaySearchResultFragment())
 
         search(searchView)
@@ -144,27 +148,27 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun switchModeListener(menu: Menu) {
-        val item = menu.findItem(R.id.switchMode)
-        item.setActionView(R.layout.switch_layout)
-        val switcher = item.actionView.findViewById<SwitchCompat>(R.id.modeSwitcher)
-
-        switcher.isChecked = getModeValue()
-
-        switcher.setOnCheckedChangeListener { _, state ->
-            val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
-            with(sharedPref.edit()) {
-                putBoolean(getString(R.string.modeValue), state)
-                apply()
-            }
-
-            TaskStackBuilder.create(this)
-                .addNextIntent(Intent(this, MainActivity::class.java))
-                .addNextIntent(this.intent)
-                .startActivities()
-        }
-
-    }
+//    private fun switchModeListener(menu: Menu) {
+//        val item = menu.findItem(R.id.switchMode)
+//        item.setActionView(R.layout.switch_layout)
+//        val switcher = item.actionView.findViewById<SwitchCompat>(R.id.modeSwitcher)
+//
+//        switcher.isChecked = getModeValue()
+//
+//        switcher.setOnCheckedChangeListener { _, state ->
+//            val sharedPref = this.getPreferences(Context.MODE_PRIVATE)
+//            with(sharedPref.edit()) {
+//                putBoolean(getString(R.string.modeValue), state)
+//                apply()
+//            }
+//
+//            TaskStackBuilder.create(this)
+//                .addNextIntent(Intent(this, MainActivity::class.java))
+//                .addNextIntent(this.intent)
+//                .startActivities()
+//        }
+//
+//    }
 
     private fun search(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -239,20 +243,20 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun otherApps() {
-        val uri: Uri = Uri.parse("https://play.google.com/store/apps/dev?id=6605125519975771237")
+        val uri: Uri = Uri.parse(Config().OTHER_APPS)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
 
     private fun contactUs() {
-        val uri: Uri = Uri.parse("mailto:contact@me.com")
+        val uri: Uri = Uri.parse("mailto:"+Config().EMAIL)
         val intent = Intent(Intent.ACTION_VIEW, uri)
         startActivity(intent)
     }
 
     private fun filterSource(keyword: String?, list: ArrayList<WDSource>) {
         val searchList = ArrayList<WDSource>()
-        if (keyword != null && keyword.length > 3) {
+        if (keyword != null && keyword.length > 2) {
             for (index in 0 until list.size) {
                 if (list[index].sourceName.lowercase().startsWith(keyword.lowercase())) {
                     val result = list[index]
@@ -272,6 +276,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
+        searchResultContainer.visibility = View.GONE
+
         if(CURRENT_FRAGMENT != MAIN_FRAGMENT){
             fragmentSwitcher(MainFragment(), MAIN_FRAGMENT)
         }else if(
@@ -282,5 +288,11 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,R.string.pressTwiceToExit,Toast.LENGTH_SHORT).show()
             CURRENT_TIME_MILLI_SECONDS = System.currentTimeMillis()
         }
+    }
+
+    override fun openWebView(url:String) {
+        val intent = Intent(this, WebViewActivity::class.java)
+        intent.putExtra("source", url)
+        startActivity(intent)
     }
 }

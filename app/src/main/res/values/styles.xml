@@ -4,9 +4,9 @@
         <!-- Text Size -->
         <!--        <item name="android:textSize">@dimen/textSizePrimary</item>-->
         <!-- Query Text Color -->
-        <item name="android:textColorPrimary">@color/white</item>
-        <!-- Hint Color -->
-        <item name="android:textColorHint">@color/pink</item>
+<!--        <item name="android:textColorPrimary">@color/white</item>-->
+<!--        &lt;!&ndash; Hint Color &ndash;&gt;-->
+<!--        <item name="android:textColorHint">@color/pink</item>-->
         <!-- Icon Color -->
 <!--        <item name="android:tint">@color/white</item>-->
     </style>

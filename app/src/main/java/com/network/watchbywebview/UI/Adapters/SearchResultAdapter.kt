@@ -34,11 +34,11 @@ class SearchResultAdapter (private val context: Context, private val list:Mutabl
         holder.container.setOnClickListener(View.OnClickListener {
             click(position)
         })
-        if(isDarkTheme){
-            holder.drawable.setStroke(3, Color.WHITE)
-        }else{
-            holder.drawable.setStroke(3, Color.BLACK)
-        }
+//        if(isDarkTheme){
+//            holder.drawable.setStroke(3, Color.WHITE)
+//        }else{
+//            holder.drawable.setStroke(3, Color.BLACK)
+//        }
 
 
     }

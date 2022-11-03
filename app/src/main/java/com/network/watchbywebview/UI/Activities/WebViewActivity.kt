@@ -1,34 +1,27 @@
-package com.network.watchbywebview.UI.Fragments
+package com.network.watchbywebview.UI.Activities
 
-import android.content.Context.CONNECTIVITY_SERVICE
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.webkit.*
 import android.widget.ProgressBar
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.network.watchbywebview.R
 import com.network.watchbywebview.ViewModel.WebViewViewModel
 import java.io.ByteArrayInputStream
 
-class DisplayWebView : Fragment() {
-
+class WebViewActivity : AppCompatActivity() {
     private lateinit var webView: WebView
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_web_view)
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_display_web_view, container, false)
+        val webViewVM : WebViewViewModel by viewModels()
+        val extras = intent.extras
 
-        val webViewVM : WebViewViewModel by activityViewModels()
-
-        val progressView = view.findViewById<ProgressBar>(R.id.progressView)
+        val progressView = findViewById<ProgressBar>(R.id.progressView)
         // WebView Control
-        webView = view.findViewById<WebView>(R.id.webview)
+        webView = findViewById<WebView>(R.id.webview)
         webView.scrollBarStyle = WebView.SCROLLBARS_OUTSIDE_OVERLAY
         webView.isScrollbarFadingEnabled = true
         webView.isLongClickable = true
@@ -47,7 +40,13 @@ class DisplayWebView : Fragment() {
         //webSettings.setAppCacheEnabled(true)
         //webSettings.setAppCachePath(application.cacheDir.absolutePath)
 
-        val url = webViewVM.getUrlSource()
+//        val url = webViewVM.getUrlSource()
+        var url = ""
+         if (extras != null) {
+             url = extras.getString("source")!!
+         }
+        println("---------> WebView Url: $url")
+
         webView.loadUrl(url)
 
 //        val cm = application.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -87,9 +86,8 @@ class DisplayWebView : Fragment() {
 
             }
         }
-
-        return view
     }
+
     private fun destroyWebView() {
 
         // Make sure you remove the WebView from its parent view before doing anything.
@@ -119,8 +117,8 @@ class DisplayWebView : Fragment() {
         //webView = null
     }
 
-    override fun onDestroyView() {
-       // destroyWebView()
-        super.onDestroyView()
+    override fun onDestroy() {
+        destroyWebView()
+        super.onDestroy()
     }
 }

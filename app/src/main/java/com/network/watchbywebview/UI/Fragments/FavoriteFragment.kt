@@ -14,11 +14,13 @@ import com.network.watchbywebview.DATA.Database.RoomDB.Favorite.FavoriteEntity
 import com.network.watchbywebview.R
 import com.network.watchbywebview.UI.Activities.MainActivity
 import com.network.watchbywebview.UI.Adapters.MainAdapter
+import com.network.watchbywebview.UI.communication.Communicat
 import com.network.watchbywebview.ViewModel.FavoriteViewModel
 import com.network.watchbywebview.ViewModel.WebViewViewModel
 
 class FavoriteFragment : Fragment() {
     private lateinit var mainAdapter:MainAdapter
+    private val WEBVIEW_FRAGMENT = 2
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,12 +34,19 @@ class FavoriteFragment : Fragment() {
 
         val mainRecyclerView = view.findViewById<RecyclerView>(R.id.mainRecyclerView)
 
+        val fragmentCallback = activity as Communicat
+
+
         favoriteVM.getFavorite()
         favoriteVM.getAll.observe(this, Observer { list ->
 
             mainAdapter = MainAdapter(context, list, FAVORITE, isDarkTheme,{ position ->
                 webViewVM.setUrlSource(list[position].sourceUrl)
-                (activity as MainActivity?)?.fragmentSwitcher(DisplayWebView(), 0)
+                fragmentCallback.openWebView(list[position].sourceUrl)
+//                val url = webViewVM.getUrlSource()
+//                (activity as MainActivity?)?.fragmentSwitcher(DisplayWebView(), WEBVIEW_FRAGMENT)
+
+
             },{ position ->
                 //delete
                 val fav = FavoriteEntity(0, list[position].sourceName, list[position].iconUrl, list[position].sourceUrl)

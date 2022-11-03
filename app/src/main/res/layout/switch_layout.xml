@@ -8,6 +8,5 @@
     <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/modeSwitcher"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        style="@style/darkTheme"/>
+        android:layout_height="wrap_content" />
 </RelativeLayout>

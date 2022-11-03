@@ -22,7 +22,7 @@ class MainAdapter (private val context: Context, private val list:MutableList<WD
         val container: RelativeLayout = view.findViewById(R.id.resourceContainer)
         val MAIN = 0
         val FAVORITE = 1
-        val drawable: GradientDrawable = container.background.mutate() as GradientDrawable
+        //val drawable: GradientDrawable = container.background.mutate() as GradientDrawable
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -52,11 +52,11 @@ class MainAdapter (private val context: Context, private val list:MutableList<WD
             }
         }
 
-        if(isDarkTheme){
-            holder.drawable.setStroke(3, Color.WHITE)
-        }else{
-            holder.drawable.setStroke(3, Color.BLACK)
-        }
+//        if(isDarkTheme){
+//            holder.drawable.setStroke(3, Color.WHITE)
+//        }else{
+//            holder.drawable.setStroke(3, Color.BLACK)
+//        }
 
     }
 
